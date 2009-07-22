@@ -9,7 +9,7 @@ package UsandoParqueo;
 public interface StackInterface<E> {
 
     public E pop();
-    public void push (E push);
+    public void push (E temp);
     public E peek();
 
 }
