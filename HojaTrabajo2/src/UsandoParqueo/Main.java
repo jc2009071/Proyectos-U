@@ -22,10 +22,6 @@ public class Main {
          Scanner scan = new Scanner(System.in);
          String ingreso;
 
-
-
-
-        // TODO code application logic here
                int opcion;
                do {
             System.out.println("\n**************************************");
