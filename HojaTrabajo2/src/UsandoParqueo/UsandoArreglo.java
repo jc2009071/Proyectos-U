@@ -5,7 +5,7 @@ package UsandoParqueo;
  *
  * @author Luis Carlos
  */
-public class UsandoArreglo<E> implements StackInterface {
+public class UsandoArreglo<E> implements StackInterface<E> {
 
   E[] arreglo = (E[]) new Object [10];
   private int pointer;

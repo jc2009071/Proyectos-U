@@ -5,7 +5,7 @@ package UsandoParqueo;
  *
  * @author Luis Carlos
  */
-public class UsandoLista <E> implements StackInterface {
+public class UsandoLista <E> implements StackInterface<E> {
 
     Nodo<E> cabeza;     //
 
