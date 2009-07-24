@@ -45,7 +45,7 @@ public class Main {
                     break;
 
 
-                case 2:
+                case 2://solo saca el ultimo vehiculo
                     System.out.println("Vehiculo sacado con placa: ");
                     System.out.println(parq.pop());
                     break;
