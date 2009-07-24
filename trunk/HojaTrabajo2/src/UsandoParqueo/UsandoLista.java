@@ -30,6 +30,7 @@ public class UsandoLista <E> implements StackInterface<E> {
     }
 
     public void push(E push) {
+        assert(push==null);
         cabeza = new Nodo<E>(push, cabeza);
         //throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -40,5 +41,4 @@ public class UsandoLista <E> implements StackInterface<E> {
         else
             return cabeza.id;   // regresa ultimo elemento
     }
-
 }
