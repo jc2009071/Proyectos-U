@@ -16,8 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // UsandoArreglo<String> pila = new UsandoArreglo<String>();
-         UsandoLista<String> parq = new UsandoLista<String>();
+        UsandoArreglo<String> parq = new UsandoArreglo<String>();
+        // UsandoLista<String> parq = new UsandoLista<String>();
 
          Scanner scan = new Scanner(System.in);
          String ingreso;
@@ -44,21 +44,22 @@ public class Main {
                     parq.push(ingreso);
                     break;
 
-
                 case 2://solo saca el ultimo vehiculo
-                    System.out.println("Vehiculo sacado con placa: ");
-                    System.out.println(parq.pop());
+                    System.out.println("Vehiculo sacado con placa: " + parq.pop());
+                    //System.out.println(parq.pop());
                     break;
 
                 case 3:
                     System.out.println("Ultima placa ingresada: " + parq.peek());
                     break;
 
+                case 4:
+                    System.out.println("Adios\n");
+                    break;
+
                 default:
                     System.out.println("Ingreso invalido, intentelo de nuevo");
             }
-
-
         } while (opcion != 4);
     }
 
