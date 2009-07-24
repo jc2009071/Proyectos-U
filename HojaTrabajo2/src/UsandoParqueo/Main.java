@@ -16,6 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        //cambiar para usar diferente implementacion
         UsandoArreglo<String> parq = new UsandoArreglo<String>();
         // UsandoLista<String> parq = new UsandoLista<String>();
 
@@ -23,7 +24,7 @@ public class Main {
          String ingreso;
 
                int opcion;
-               do {
+               do { //menu
             System.out.println("\n**************************************");
             System.out.println("*           Hoja de Trabajo 2        *");
             System.out.println("**************************************");
@@ -32,13 +33,13 @@ public class Main {
             System.out.println("3. Ultima placa ingresada");
             System.out.println("4. Salir");
             System.out.println("\nIngrese la opcion deseada: ");
-            opcion = scan.nextInt();
+            opcion = scan.nextInt(); // ingreso de opcion
             scan.nextLine();//ENTER
             System.out.println("");
 
             switch (opcion) {
 
-                case 1:
+                case 1:// ingreso de vehiculos
                     System.out.println("Ingrese la placa de su vehiculo: ");
                     ingreso = scan.nextLine();
                     parq.push(ingreso);
@@ -46,21 +47,20 @@ public class Main {
 
                 case 2://solo saca el ultimo vehiculo
                     System.out.println("Vehiculo sacado con placa: " + parq.pop());
-                    //System.out.println(parq.pop());
                     break;
 
-                case 3:
+                case 3://muestra la ultima placa
                     System.out.println("Ultima placa ingresada: " + parq.peek());
                     break;
 
-                case 4:
+                case 4: // mensaje de despedida
                     System.out.println("Adios\n");
                     break;
 
-                default:
+                default: // programacion defensiva
                     System.out.println("Ingreso invalido, intentelo de nuevo");
             }
-        } while (opcion != 4);
+        } while (opcion != 4);//condicion para salir del ciclo
     }
 
 }
