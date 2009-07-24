@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Luis Carlos
+ * @author Administrator
  */
-public class UsandoListaTest {
+public class UsandoArregloTest {
 
-    public UsandoListaTest() {
+    public UsandoArregloTest() {
     }
 
     @BeforeClass
@@ -38,35 +38,36 @@ public class UsandoListaTest {
     }
 
     /**
-     * Test of pop method, of class UsandoLista.
+     * Test of pop method, of class UsandoArreglo.
      */
     @Test
     public void testPop() {
         System.out.println("pop");
-        UsandoLista instance = new UsandoLista();
-        String expResult = null;
+        UsandoArreglo instance = new UsandoArreglo();
+        instance.push("123asd");
+        String expResult = "123asd";
         String result = (String) instance.pop();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of push method, of class UsandoLista.
+     * Test of push method, of class UsandoArreglo.
      */
     @Test
     public void testPush() {
         System.out.println("push");
-        String push = "algo";
-        UsandoLista instance = new UsandoLista();
-        instance.push(push);
+        String temp = "algo";
+        UsandoArreglo instance = new UsandoArreglo();
+        instance.push(temp);
     }
 
     /**
-     * Test of peek method, of class UsandoLista.
+     * Test of peek method, of class UsandoArreglo.
      */
     @Test
     public void testPeek() {
         System.out.println("peek");
-        UsandoLista instance = new UsandoLista();
+        UsandoArreglo instance = new UsandoArreglo();
         String expResult = null;
         String result = (String) instance.peek();
         assertEquals(expResult, result);
