@@ -11,7 +11,7 @@ package hojatrabajo6;
  */
 public interface Interfaz<E> {
 
-    public void add(E elemento);
+    public void add(Nodo temp, E elemento);
     public E remove(E elemento);
     public String mostrar(String conjunto);
 }
