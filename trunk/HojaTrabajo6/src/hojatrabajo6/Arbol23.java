@@ -22,19 +22,20 @@ public class Arbol23<E> implements Interfaz<E>{
         int element = Integer.parseInt(elemento.toString());
 
         int dato, temporal;
+        temp.check();
         if(!temp.datos){
-            if(temp.getData1().toString().equals(""))
+            if(temp.getData1().toString().equals("") || temp.getData1()==null)
                 temp.setData1(element);
             else{
-                //dato=Integer.parseInt(temp.getData1().toString());
                 dato = Integer.parseInt(temp.getData1().toString());
-                if(element<dato){
+                if(element<dato && temp.getData2()==null){
                     temporal = dato;
                     temp.setData1(element);
                     temp.setData2(dato);
                 }
                 else
-                    temp.setData2(element);
+                    if(temp.getData2()==null)
+                        temp.setData2(element);
 
             }
         }
@@ -94,7 +95,7 @@ public class Arbol23<E> implements Interfaz<E>{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String mostrar(String conjunto) {
+    public String mostrar() {
         padre.toString();
         throw new UnsupportedOperationException("Not supported yet.");
     }

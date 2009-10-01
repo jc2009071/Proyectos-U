@@ -15,14 +15,16 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int opcion = 0;
+        Arbol23 arbolA = new Arbol23();
+        Arbol23 arbolB = new Arbol23();
+        int opcion = 0, valor;
         String conjunto;
         boolean error = true;
         
         do{
 
         System.out.println("\n               MENU\n");
-        System.out.println("Eliga una opcion:");
+        System.out.println("Elija una opcion:");
         System.out.println("1. Agregar Elementos al conjunto A o B");
         System.out.println("2. Retirar Elementos del conjunto A o B");
         System.out.println("3. Formar un conjunto nuevo C, que sea A union B");
@@ -30,21 +32,20 @@ public class Main {
         System.out.println("5. Mostrar cualquiera de los conjuntos");
         System.out.println("6. Salir");
 
-            //try {
                 opcion = scan.nextInt();
-            /*} catch (InputMismatchException e) {
-            System.out.println("Error de ingreso.");
-            }*/
-
+            
         switch(opcion){
             case 1:
                 error = true;
                 while(error){
                     System.out.println("Elija conjunto: A o B");
                     conjunto = scan.next();
+                    System.out.println("Ingrese Elemento");
+                    valor=scan.nextInt();
 
                     if(conjunto.equalsIgnoreCase("a")){
-                    error = false;
+                        error = false;
+
 
                     }
                     else
