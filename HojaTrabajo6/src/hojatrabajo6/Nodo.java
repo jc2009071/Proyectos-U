@@ -83,5 +83,25 @@ public class Nodo<E> {
 
         }
 
+    @Override
+        public String toString(){
+            String print="";
+
+            if(izquierdo!=null)
+                print+=izquierdo.toString();
+
+            print+=data1;
+
+            if(centro!=null)
+                print+=centro.toString();
+
+            print+=data2;
+
+            if(derecho!=null)
+                print+= derecho.toString();
+
+            return print;
+        }
+
         
 }

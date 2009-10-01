@@ -17,35 +17,37 @@ public class Arbol23<E> implements Interfaz<E>{
         padre = new Nodo("");
     }
 
-    public void add(Nodo temp, E elemento) {
+    public void arreglar(Nodo temp, E elemento) {
 
         int element = Integer.parseInt(elemento.toString());
 
         int dato, temporal;
-        if(!padre.datos){
-            if(padre.getData1().toString().equals(""))
-                padre.setData1(element);
+        if(!temp.datos){
+            if(temp.getData1().toString().equals(""))
+                temp.setData1(element);
             else{
-                dato=padre.getData1();
+                //dato=Integer.parseInt(temp.getData1().toString());
+                dato = Integer.parseInt(temp.getData1().toString());
                 if(element<dato){
                     temporal = dato;
-                    padre.setData1(element);
-                    padre.setData2(dato);
+                    temp.setData1(element);
+                    temp.setData2(dato);
                 }
                 else
-                    padre.setData2(element);
+                    temp.setData2(element);
 
             }
         }
 
         else{
 
-            if(element<padre.getData1()){
-                if(!padre.getIzq().datos){
-                    if(padre.getIzq()==null)
-                        padre.setIzq(new Nodo(element));
+            if(element<Integer.parseInt(temp.getData1().toString())){
+                temp.check();
+                if(!temp.getIzq().datos){
+                    if(temp.getIzq()==null)
+                        temp.setIzq(new Nodo(element));
                     else
-                        add(padre.getIzq(), elemento);
+                        arreglar(temp.getIzq(), elemento);
                 }
                 else{
 
@@ -54,13 +56,14 @@ public class Arbol23<E> implements Interfaz<E>{
             }
             else{
 
-                if(element>padre.getData1() && element<padre.getData2()){
-                    if(!padre.getCentro().datos){
-                        if(!padre.getCentro().datos){
-                            if(padre.getCentro()==null)
-                                padre.setCentro(new Nodo(element));
+                if(element>Integer.parseInt(temp.getData1().toString()) && element<Integer.parseInt(temp.getData2().toString())){
+                    temp.check();
+                    if(!temp.getCentro().datos){
+                        if(!temp.getCentro().datos){
+                            if(temp.getCentro()==null)
+                                temp.setCentro(new Nodo(element));
                             else
-                                add(padre.getCentro(), elemento);
+                                arreglar(temp.getCentro(), elemento);
                         }
                     }
                     else{
@@ -68,13 +71,14 @@ public class Arbol23<E> implements Interfaz<E>{
                     }
                 }
                 else
-                    if(element>padre.getData2()){
-                        if(!padre.getDer().datos){
-                            if(!padre.getDer().datos){
-                                if(padre.getDer()==null)
-                                    padre.setDer(new Nodo(element));
+                    if(element>Integer.parseInt(temp.getData2().toString())){
+                        temp.check();
+                        if(!temp.getDer().datos){
+                            if(!temp.getDer().datos){
+                                if(temp.getDer()==null)
+                                    temp.setDer(new Nodo(element));
                                 else
-                                    add(padre.getDer(), elemento);
+                                    arreglar(temp.getDer(), elemento);
                             }
                         }
                         else{
@@ -91,7 +95,13 @@ public class Arbol23<E> implements Interfaz<E>{
     }
 
     public String mostrar(String conjunto) {
+        padre.toString();
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void add(E elemento) {
+        arreglar(padre, elemento);
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
