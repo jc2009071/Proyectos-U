@@ -9,9 +9,12 @@ package hojatrabajo6;
  *
  * @author Luis C
  */
-public interface Interfaz<E> {
+public interface InterfazConjuntos<E> {
 
     public void add(E elemento);
     public E remove(E elemento);
-    public String mostrar();
+    public void union();
+    public void interseccion();
+    public String mostrar(String print);
+
 }
