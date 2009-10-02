@@ -44,48 +44,41 @@ public class Arbol23<E> implements Interfaz<E>{
 
             if(element<Integer.parseInt(temp.getData1().toString())){
                 temp.check();
-                if(!temp.getIzq().datos){
-                    if(temp.getIzq()==null)
-                        temp.setIzq(new Nodo(element));
-                    else
-                        arreglar(temp.getIzq(), elemento);
+                if(temp.getIzq()==null){
+                    temp.setIzq(new Nodo(element));
                 }
                 else{
-
+                    if(!temp.getIzq().datos){
+                        arreglar(temp.getIzq(), elemento);
+                    }
                 }
-
+              
             }
             else{
 
                 if(element>Integer.parseInt(temp.getData1().toString()) && element<Integer.parseInt(temp.getData2().toString())){
                     temp.check();
-                    if(!temp.getCentro().datos){
-                        if(!temp.getCentro().datos){
-                            if(temp.getCentro()==null)
-                                temp.setCentro(new Nodo(element));
-                            else
-                                arreglar(temp.getCentro(), elemento);
-                        }
+                    if(temp.getCentro()==null){
+                        temp.setCentro(new Nodo(element));
                     }
                     else{
-
+                        if(!temp.getCentro().datos){
+                            arreglar(temp.getCentro(), elemento);
+                        }
                     }
                 }
-                else
+                else{
                     if(element>Integer.parseInt(temp.getData2().toString())){
                         temp.check();
-                        if(!temp.getDer().datos){
-                            if(!temp.getDer().datos){
-                                if(temp.getDer()==null)
-                                    temp.setDer(new Nodo(element));
-                                else
-                                    arreglar(temp.getDer(), elemento);
-                            }
+                        if(temp.getDer()==null){
+                            temp.setDer(new Nodo(element));
                         }
                         else{
-
+                            if(!temp.getDer().datos)
+                                arreglar(temp.getDer(), elemento);
                         }
                     }
+                }
             }
         }
         //throw new UnsupportedOperationException("Not supported yet.");
