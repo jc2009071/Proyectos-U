@@ -11,8 +11,8 @@ package hojatrabajo6;
  */
 public interface InterfazConjuntos<E> {
 
-    public void add(E elemento);
-    public E remove(E elemento);
+    public void add(E conjunto, E elemento);
+    public E remove(E conjunto, E elemento);
     public void union();
     public void interseccion();
     public String mostrar(String print);

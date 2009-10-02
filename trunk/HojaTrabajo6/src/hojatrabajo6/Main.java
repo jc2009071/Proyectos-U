@@ -15,8 +15,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Arbol23 arbolA = new Arbol23();
-        Arbol23 arbolB = new Arbol23();
+        Conjuntos conjuntos = new Conjuntos();
         int opcion = 0, valor;
         String conjunto;
         boolean error = true;
@@ -45,17 +44,17 @@ public class Main {
 
                     if(conjunto.equalsIgnoreCase("a")){
                         error = false;
-
+                        conjuntos.add("A", valor);
 
                     }
                     else
                         if(conjunto.equalsIgnoreCase("b")){
-                        error = false;
-
+                            error = false;
+                            conjuntos.add("B", valor);
                         }
                         else{
-                        System.out.println("No existe ese conjunto");
-                        error = true;
+                            System.out.println("No existe ese conjunto");
+                            error = true;
                         }
                 }
 
@@ -66,29 +65,33 @@ public class Main {
                 while(error){
                     System.out.println("Elija conjunto: A o B");
                     conjunto = scan.next();
+                    System.out.println("Ingrese Elemento");
+                    valor=scan.nextInt();
 
                     if(conjunto.equalsIgnoreCase("a")){
-                    error = false;
-
+                        error = false;
+                        conjuntos.remove("B", valor);
                     }
                     else
                         if(conjunto.equalsIgnoreCase("b")){
-                        error = false;
-
+                            error = false;
+                            conjuntos.remove("B", valor);
                         }
                         else{
-                        System.out.println("No existe ese conjunto");
-                        error = true;
+                            System.out.println("No existe ese conjunto");
+                            error = true;
                         }
                 }
                 break;
 
             case 3:
-
+                conjuntos.union();
+                System.out.println("Conjunto C creado.");
                 break;
 
             case 4:
-
+                conjuntos.interseccion();
+                System.out.println("Conjunto C creado.");
                 break;
 
             case 5:
@@ -98,18 +101,18 @@ public class Main {
                     conjunto = scan.next();
 
                     if(conjunto.equalsIgnoreCase("a")){
-                    error = false;
-
+                        error = false;
+                        System.out.println(conjuntos.mostrar("A"));
                     }
                     else
                         if(conjunto.equalsIgnoreCase("b")){
-                        error = false;
-
+                            error = false;
+                            System.out.println(conjuntos.mostrar("B"));
                         }
                         else
                             if(conjunto.equalsIgnoreCase("c")){
-                            error = false;
-
+                                error = false;
+                                System.out.println(conjuntos.mostrar("C"));
                             }
                             else{
                                 System.out.println("No existe ese conjunto");
