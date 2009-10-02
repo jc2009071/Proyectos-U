@@ -11,20 +11,27 @@ package hojatrabajo6;
  */
 public class Conjuntos<E> implements InterfazConjuntos<E> {
 
-    Arbol23 arbolA = new Arbol23();
-    Arbol23 arbolB = new Arbol23();
-    Arbol23 arbolC = new Arbol23();
+    private Arbol23 arbolA = new Arbol23();
+    private Arbol23 arbolB = new Arbol23();
+    private Arbol23 arbolC = new Arbol23();
 
-    public void add(E elemento) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void add(E conjunto, E elemento) {
+
+        if(conjunto.toString().equals("A"))
+            arbolA.add(elemento);
+        else
+            if(conjunto.toString().equals("B"))
+                arbolB.add(elemento);
+
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public E remove(E elemento) {
+    public E remove(E conjunto, E elemento) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void union() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void interseccion() {

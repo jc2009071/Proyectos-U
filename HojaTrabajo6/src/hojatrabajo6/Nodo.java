@@ -88,19 +88,19 @@ public class Nodo<E> {
             String print="";
 
             if(izquierdo!=null)
-                print+=izquierdo.toString();
+                print+= (" " +izquierdo.toString());
 
             if(data1!=null)
-                print+=data1;
+                print+=(" " +data1);
 
             if(centro!=null)
-                print+=centro.toString();
+                print+=(" " +centro.toString());
 
-            if(data1!=null)
-                print+=data2;
+            if(data2!=null)
+                print+=(" " +data2);
 
             if(derecho!=null)
-                print+= derecho.toString();
+                print+= (" " +derecho.toString());
 
             return print;
         }

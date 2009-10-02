@@ -96,8 +96,8 @@ public class Arbol23<E> implements Interfaz<E>{
     }
 
     public String mostrar() {
-        padre.toString();
-        throw new UnsupportedOperationException("Not supported yet.");
+        return padre.toString();
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void add(E elemento) {
