@@ -32,8 +32,9 @@ public class Conjuntos<E> implements InterfazConjuntos<E> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    //funciona para conjuntos del mismo tamanio
     public void union() {
-        
+        arbolC = new Arbol23();
         Integer[] temp_a = preparar("A");
         Integer[] temp_b = preparar("B");
         LinkedList temp = new LinkedList();
@@ -51,22 +52,28 @@ public class Conjuntos<E> implements InterfazConjuntos<E> {
             }
         }
 
-        for(int i =0; i<temp.size(); i++)
-            arbolC.add(temp.get(i));
 
-        int i=0, j=0;
-        
+        for(int k =0; k<temp.size(); k++)
+            arbolC.add(temp.get(k));
                     
         //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void interseccion() {
+        arbolC = new Arbol23();
         Integer[] temp_a = preparar("A");
         Integer[] temp_b = preparar("B");
         LinkedList temp = new LinkedList();
 
-        for(int i=0; i<temp_a.length || i<temp_b.length ;i++){
-        }
+        for(int i=0; i<temp_a.length;i++)
+            for(int j=0; j<temp_b.length;j++){
+
+                if(temp_a[i]==temp_b[j])
+                    temp.add(temp_a[i]);
+            }
+        
+        for(int k =0; k<temp.size(); k++)
+            arbolC.add(temp.get(k));
         
         //throw new UnsupportedOperationException("Not supported yet.");
     }
