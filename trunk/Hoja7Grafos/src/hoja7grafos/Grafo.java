@@ -21,19 +21,19 @@ public class Grafo<E> {
         MapaAdyacencia = new HashMap();
     }
 
-    public int getCuantaArcos(){
+    /*public int getCuantaArcos(){
 
-        int cuenta = 0;
-        for(int i =0; i<MapaAdyacencia.capacity; i++){
+    int cuenta = 0;
+    for(int i =0; i<MapaAdyacencia.; i++){
 
-            if(MapaAdyacencia.keySet()[i] != null){
+    if(MapaAdyacencia.keySet()[i] != null){
 
-                LinkedList arcos = (LinkedList) MapaAdyacencia.get(MapaAdyacencia.keySet[i]);
-                cuenta += arcos.size();
-            }
-        }
-        return cuenta;
+    LinkedList arcos = (LinkedList) MapaAdyacencia.get(MapaAdyacencia.keySet[i]);
+    cuenta += arcos.size();
     }
+    }
+    return cuenta;
+    }*/
 
     public boolean agregarVertice(E vertice){
 
@@ -44,7 +44,7 @@ public class Grafo<E> {
         return true;
     }
 
-    public boolean agregarArco(E vertice1, E vertice2){
+    public boolean agregarArco(E vertice1, E vertice2, Integer peso){
 
         agregarVertice(vertice1);
         agregarVertice(vertice2);
