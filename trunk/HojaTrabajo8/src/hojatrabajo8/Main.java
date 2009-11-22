@@ -29,7 +29,8 @@ public class Main {
             System.out.println("1. agregar vertice");
             System.out.println("2. agregar enlace");
             System.out.println("3. encontrar camino mas corto");
-            System.out.println("4. salir");
+            System.out.println("4. mostrar");
+            System.out.println("5. salir");
 
             opcion = scan.nextInt();
 
@@ -52,16 +53,22 @@ public class Main {
                     
                     break;
                 case 3:
-                    grafo.toString();
-                    grafo.mostrar();
+                    
                     break;
                 case 4:
+                    System.out.println("Vertices: ");
+                    System.out.println(grafo.toString());
+                    System.out.println("Matriz: ");
+                    System.out.println(grafo.mostrar());
+                    break;
+                case 5:
+
                     break;
 
                 default:
                     System.out.println("Ingreso invalido.");
             }
-        }while (opcion!=4);
+        }while (opcion!=5);
 
 
     }

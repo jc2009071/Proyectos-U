@@ -36,10 +36,13 @@ public class Grafo {
 
         for(int i=0;i<vertices.length;i++){
 
-            if(vertices[i]==null)
+            if(vertices[i]==0){
                 vertices[i]=nodo;
+                return true;
+            }
         }
         return true;
+        
     }
 
     public boolean agregarEnlace(int nodo1, int nodo2, int peso){
@@ -70,12 +73,21 @@ public class Grafo {
 
     @Override
     public String toString(){
-
-        return vertices.toString();
+        String cosa="";
+        for(int i=0;i<vertices.length;i++)
+            cosa+=vertices[i]+",";
+        return cosa;
     }
 
     public String mostrar(){
+        String cosa="";
 
-        return matriz.toString();
+        for(int i=0; i<matriz.length;i++){
+            for(int j=0; j<matriz.length;j++){
+                cosa+=matriz[i][j]+",";
+            }
+            cosa+="\n";
+        }
+        return cosa;
     }
 }
