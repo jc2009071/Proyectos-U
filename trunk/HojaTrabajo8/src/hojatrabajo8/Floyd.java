@@ -11,7 +11,22 @@ package hojatrabajo8;
  */
 public class Floyd {
 
+    Integer[][] matriz;
+    Integer[][] recorrido;
 
+    public void path(Integer[][] matriz1, Integer[] vertices1){
+        int cosa = matriz1.length;
+        matriz = new Integer[cosa][cosa];
+        recorrido  = new Integer[cosa][cosa];
+
+
+    }
+
+    public void copiar(){
+
+        
+
+    }
 
 
 }

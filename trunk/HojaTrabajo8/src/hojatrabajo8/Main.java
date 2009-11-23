@@ -21,7 +21,7 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         Grafo grafo = new Grafo();
-        int opcion,nodo1,nodo2;
+        int opcion,nodo1,nodo2,peso;
 
         do{
             System.out.println();
@@ -37,8 +37,8 @@ public class Main {
             switch(opcion){
                 case 1:
                     System.out.println("Ingrese nombre del vertice (numero): ");
-                    opcion=scan.nextInt();
-                    if(!grafo.agregarNodo(opcion))
+                    nodo1=scan.nextInt();
+                    if(!grafo.agregarNodo(nodo1))
                         System.out.println("Ese vertice ya existe.");
                     break;
                 case 2:
@@ -47,13 +47,15 @@ public class Main {
                     System.out.println("Ingrese nombre del vertice destino (numero): ");
                     nodo2=scan.nextInt();
                     System.out.println("Ingrese peso del enlace (numero<1000): ");
-                    opcion=scan.nextInt();
+                    peso=scan.nextInt();
 
-                    grafo.agregarEnlace(nodo1, nodo2, opcion);
+                    grafo.agregarEnlace(nodo1, nodo2, peso);
                     
                     break;
                 case 3:
-                    
+                    grafo.path();
+                    System.out.println("Matriz: ");
+                    System.out.println(grafo.mostrar());
                     break;
                 case 4:
                     System.out.println("Vertices: ");
