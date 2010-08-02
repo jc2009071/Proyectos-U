@@ -1,0 +1,3 @@
+puerto 80! no 8080
+telnet
+programa en ruby q revise si el otro si esta oyendo en ese puerto
