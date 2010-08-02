@@ -1,12 +1,3 @@
-'''text = "GET /index.html HTTP/1.1"
-
-# a string of digits
-m = re.match("GET .* HTTP/1\.1", text)
-if m: print repr("\d+"), "=>", repr(m.group(0))
-else: print "no hizo match"'''
-# http://www.wellho.net/resources/ex.php4?item=y202/pyserv
-# Basic web server
-
 import socket
 import re
 
@@ -38,23 +29,20 @@ while 1:
         break
 
     isValidRequest = matchesGet(request)
-    print "Request: ",request,"isValidRequest:",isValidRequest
+    print "Request: ",request,"isValidRequest:",isValidRequest #c va al log
     
     if isValidRequest:
         pass
     else:
         cfile.write("HTTP/1.1 400 Bad Request")
 
-
-    line = cfile.readline().strip()
     try:
         print "tratando de imprimir html"
-        #content = open("D:\\My Dropbox\\UVG\\Sistemas Operativos\\Proy0\\respuesta.html","r").read()
-        content = "<html><body><h1>hola!</h1></body></html>"
-        print content
+        content = open("/root/proy/respuesta.html","r").read()
+        #print content c va al log
         cfile.write(content)
     except:
-        print "File not found"
+        print "File not found" #c va al log
         cfile.write("File not Found")
 
     cfile.close()
