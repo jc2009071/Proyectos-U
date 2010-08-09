@@ -9,42 +9,38 @@ def matchesGet(text):
     else:
         return False
 
+#initialize socket
 host = ''
 port = 8082
 
-sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-sock.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
-sock.bind((host,port))
-sock.listen(1)
+server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+server.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
+server.bind((host,port))
+server.listen(1)
 
+#infinite loop
 while 1:
-    csock,caddr = sock.accept()
-    cfile = csock.makefile('rw',0)
+    clientSock,clientAddr = server.accept() #accept connection
+    clientFile = clientSock.makefile('rw',0) #creates comunication file
 
-    cfile.write("HTTP/1.1 200/OK\r\nContent-type:text/html\r\n\r\n")
-    
-    request = cfile.readline().strip()
-
+    clientFile.write("HTTP/1.1 200/OK\r\nContent-type:text/html\r\n\r\n")
+    # send expected file size?
+    request = clientFile.readline().strip()
     if request == False:
         break
 
     isValidRequest = matchesGet(request)
-    print "Request: ",request,"isValidRequest:",isValidRequest #c va al log
-    
-    if isValidRequest:
+    if isValidRequest: #validates request
         pass
     else:
-        cfile.write("HTTP/1.1 400 Bad Request")
+        clientFile.write("HTTP/1.1 400 Bad Request")
 
     try:
-        print "tratando de imprimir html"
         content = open("/root/proy/respuesta.html","r").read()
-        #print content c va al log
-        cfile.write(content)
+        clientFile.write(content) #send html file
     except:
-        print "File not found" #c va al log
-        cfile.write("File not Found")
+        clientFile.write("File not Found")
 
-    cfile.close()
-    csock.close()
-    
+    #close connection
+    clientFile.close()
+    clientSock.close()
