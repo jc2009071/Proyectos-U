@@ -8,14 +8,36 @@ namespace EDCriticalPath
     class Entrada
     {
 
-        int id;
+        int id, cantConn;
         string nombre, conn;
+        bool valor, setV;
 
         public Entrada(int ID, string Nombre, string Conn) {
 
             id = ID;
             nombre = Nombre;
             conn = Conn;
+            cantConn = 0;
+
+            valor = false;
+            setV = false;
+        }
+
+        public bool getValor() {
+
+            return valor;
+        }
+
+        public void setValor(bool value) {
+
+            valor = value;
+            setV = true;
+        }
+
+        public void clearValor() {
+
+            valor = false;
+            setV = false;
         }
 
         public int getId() {
@@ -33,9 +55,12 @@ namespace EDCriticalPath
             return conn;
         }
 
-        public bool connect() {
+        public int getCantConn() {
 
-            //TODO revisar llenado matriz de adyacencia entradas
+            return cantConn;
+        }
+
+        public bool connect() {
 
             bool problem = false;
 
@@ -48,7 +73,7 @@ namespace EDCriticalPath
 
                 try {
 
-                    Program.matriz[int.Parse(array[0])- 1][id - 1] = int.Parse(array[1]);
+                    Program.matriz[id - 1][int.Parse(array[0]) - 1] = int.Parse(array[1]);
                 }
                 catch (FormatException) {
 
@@ -60,7 +85,7 @@ namespace EDCriticalPath
                 }
                         
             }
-
+            cantConn++;
             return problem;
         }
     }
