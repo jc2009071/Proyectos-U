@@ -154,6 +154,44 @@ namespace EDCriticalPath
             setS = true;
         }
 
+        public void setSalida() {
+
+            switch (nombre) {
+
+                case "AND":
+                    setSalida(valorP1 && valorP2);
+                    break;
+
+                case "NAND":
+                    setSalida(!(valorP1 && valorP2));
+                    break;
+
+                case "OR":
+                    setSalida(valorP1 || valorP2);
+                    break;
+
+                case "NOR":
+                    setSalida(!(valorP1 || valorP2));
+                    break;
+
+                case "NOT":
+                    setSalida(!valorP1);
+                    break;
+
+                default:
+                    Console.WriteLine("Compuerta erronea.");
+                    break;
+            }
+        }
+
+        public bool seteable() {
+
+            if (setP1 && setP2)
+                return true;
+            else
+                return false;
+        }
+
         public bool connect() {
 
             bool problem = false;
@@ -280,6 +318,64 @@ namespace EDCriticalPath
                     Console.WriteLine("Compuerta erronea.");
                     break;
             }
+        }
+
+
+        public bool justificar(int pata, bool valor) {
+
+            switch (nombre) {
+
+                case "AND":
+                    if (pata == 1) {
+
+                        if (!setP1)
+                            setValorP1(valor);
+                        else if (valorP1 == valor)
+                            return false;
+                        else 
+                            return true;
+                    }
+                    else if (pata == 2) {
+                        if (!setP2)
+                            setValorP2(valor);
+                        else if (valorP2 == valor)
+                            return false;
+                        else
+                            return true;
+                    }
+                    else {
+
+                        return true; //hay problema
+                    }
+
+                    break;
+
+                case "NAND":
+                    
+
+                    break;
+
+                case "OR":
+                    
+
+                    break;
+
+                case "NOR":
+                    
+
+                    break;
+
+                case "NOT":
+                    
+
+                    break;
+
+                default:
+                    Console.WriteLine("Compuerta erronea.");
+                    break;
+            }
+
+            return false;
         }
     }
 }
