@@ -186,10 +186,19 @@ namespace EDCriticalPath
 
         public bool seteable() {
 
-            if (setP1 && setP2)
-                return true;
-            else
-                return false;
+            if (nombre == "NOT") {
+
+                if (setP1)
+                    return true;
+                else
+                    return false;
+            }
+            else {
+                if (setP1 && setP2)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         public bool connect() {
@@ -220,57 +229,6 @@ namespace EDCriticalPath
             }
             cantConn++;
             return problem;
-        }
-
-        public bool sensibilizar(int pata_constante, bool valor_entrada){
-
-            switch (nombre) { 
-            
-                case "AND":
-                    if (pata_constante == 1)
-                        setValorP2(true);
-                    else
-                        setValorP1(true);
-
-                    break;
-
-                case "NAND":
-                    if (pata_constante == 1)
-                        setValorP2(false);
-                    else
-                        setValorP1(false);
-
-                    break;
-
-                case "OR":
-                    if (pata_constante == 1)
-                        setValorP2(false);
-                    else
-                        setValorP1(false);
-
-                    break;
-
-                case "NOR":
-                    if (pata_constante == 1)
-                        setValorP2(true);
-                    else
-                        setValorP1(true);
-
-                    break;
-
-                case "NOT":
-                    setValorP1(valor_entrada);
-
-                    setSalida(!valor_entrada);
-                    return salida;
-
-                default:
-                    Console.WriteLine("Compuerta erronea.");
-                    break;
-            }
-
-            setSalida(valor_entrada);
-            return salida;
         }
 
         public void sensibilizar(int pata_constante) {
@@ -323,59 +281,91 @@ namespace EDCriticalPath
 
         public bool justificar(int pata, bool valor) {
 
-            switch (nombre) {
 
-                case "AND":
-                    if (pata == 1) {
+            if (nombre == "AND" || nombre == "NAND" || nombre == "OR" || nombre == "NOR") {
 
-                        if (!setP1)
-                            setValorP1(valor);
-                        else if (valorP1 == valor)
-                            return false;
-                        else 
-                            return true;
-                    }
-                    else if (pata == 2) {
-                        if (!setP2)
-                            setValorP2(valor);
-                        else if (valorP2 == valor)
-                            return false;
-                        else
-                            return true;
-                    }
-                    else {
+                if (pata == 1)
+                {
 
-                        return true; //hay problema
-                    }
+                    if (!setP1)
+                        setValorP1(valor);
+                    else if (valorP1 == valor)
+                        return false;
+                    else
+                        return true;
+                }
+                else if (pata == 2)
+                {
+                    if (!setP2)
+                        setValorP2(valor);
+                    else if (valorP2 == valor)
+                        return false;
+                    else
+                        return true;
+                }
+                else
+                    return true; //hay problema
+            }
+            else if (nombre == "NOT") {
 
-                    break;
+                if (pata == 1) {
 
-                case "NAND":
-                    
-
-                    break;
-
-                case "OR":
-                    
-
-                    break;
-
-                case "NOR":
-                    
-
-                    break;
-
-                case "NOT":
-                    
-
-                    break;
-
-                default:
-                    Console.WriteLine("Compuerta erronea.");
-                    break;
+                    if (!setP1)
+                        setValorP1(valor);
+                    else if (valorP1 == valor)
+                        return false;
+                    else
+                        return true;
+                }
+                else
+                    return true; //hay problema
+            }
+            else {
+                Console.WriteLine("Compuerta erronea");
+                return true;
             }
 
             return false;
+        }
+
+
+        public int getDelay(int pata, bool valor) {
+
+            switch (pata) { 
+            
+                case 1:
+                    setValorP1(valor);
+                    break;
+                case 2:
+                    setValorP2(valor);
+                    break;
+            }
+
+            if (seteable())
+                setSalida();
+
+            if (getSalida()) {
+
+                switch (pata) {
+
+                    case 1:
+                        return getDelayP1R();
+                    case 2:
+                        return getDelayP2R();
+                }
+            }
+            else {
+
+                switch (pata) {
+
+                    case 1:
+                        return getDelayP1F();
+                    case 2:
+                        return getDelayP2F();
+                }
+            }
+
+            return -1;
         }
     }
 }
