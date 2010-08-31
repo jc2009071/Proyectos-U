@@ -29,94 +29,150 @@ namespace EDCriticalPath
 
             generatePaths();
             main();
+            mostrarResultados();
 
             Console.Read();
+        }
+
+        public static void mostrarResultados() { 
+        
+            //TODO mostrar vectores q hacen posible el critical y el shortes path
+            //TODO con su ruta respectiva y valor del delay
+            Console.WriteLine("\n\tCritical path: ");
+            string temp = "";
+            foreach (Compuerta c in paths.ElementAt(critical[1]))
+                temp += c.getId() + ", ";
+
+            Console.WriteLine("Ruta No." + critical[1] + ": " + temp.TrimEnd(' ').TrimEnd(','));
+            Console.WriteLine("Delay: " + critical[0]);
+            Console.WriteLine("Vectores : " + getVectores(critical[1],critical[2]));
+
+            Console.WriteLine("\n\n\tShortest path: ");
+            temp = "";
+            foreach (Compuerta c in paths.ElementAt(shortest[1]))
+                temp += c.getId() + ", ";
+
+            Console.WriteLine("Ruta No." + shortest[1] + ": " + temp.TrimEnd(' ').TrimEnd(','));
+            Console.WriteLine("Delay: " + shortest[0]);
+            Console.WriteLine("Vectores : " + getVectores(shortest[1], shortest[2]));
+
+        }
+
+        public static string getVectores(int pos, int risfal) {
+
+            string cosa = "[";
+            int entrada = getEntradaPath(paths.ElementAt(pos));
+            int cont = 0;
+            int[] temp = new int[entradas.Count];
+
+            for (int i = 0; i < entradas.Count; i++) {
+
+                temp[i] = vectores.ElementAt(pos)[cont];
+                cont++;
+            }
+
+            if (risfal == 1)
+                temp[entrada] = 0;
+            else
+                temp[entrada] = 1;
+
+            for (int i = 0; i < entradas.Count; i++)
+                cosa += temp[i] + ",";
+
+            cosa = cosa.TrimEnd(',') + "] [";
+
+            if (risfal == 1)
+                temp[entrada] = 1;
+            else
+                temp[entrada] = 0;
+
+            for (int i = 0; i < entradas.Count; i++)
+                cosa += temp[i] + ",";
+
+
+                return cosa.TrimEnd(',') + "]";
         }
 
         public static void main(){
 
             for (int i = 0; i < paths.Count; i++) {
 
-                sensibilizarRuta(paths.ElementAt(i));
+                //sensibilizarRuta(paths.ElementAt(i));
 
                 justificarRuta(paths.ElementAt(i), i);
                 //showJustificacion();
 
-                calcularDelayR(i);
-                calcularDelayF();
+                if (vectores.ElementAt(i).Length == 5) { 
+                                
+                    //calcularDelayR(paths.ElementAt(i), i);
+                    calcularDelay(paths.ElementAt(i), i, 1);
+                    calcularDelay(paths.ElementAt(i), i, 0);
+                }
 
                 borrarValores();
             }
         }
 
-        public static void calcularDelayF(int pos) {
+        public static void calcularDelay(List<Compuerta> ruta, int pos, int risfal) {
 
             int delayTemp = 0;
-            int[] vector = vectores.ElementAt(pos); 
-            for (int i = 0; i < paths.Count; i++) {
+            int[] vector = vectores.ElementAt(pos);
+            int pata = 0;
+            int entrada = getEntradaPath(ruta);
+            bool valor = false;
 
-                delayTemp = 0;
-                for (int j = 0; j < paths.ElementAt(i).Count; j++) {
+            if (risfal == 1)
+                entradas.ElementAt(entrada).setValor(true);
+            else
+                entradas.ElementAt(entrada).setValor(false);
 
+            for (int i = 0; i < ruta.Count; i++) {
 
+                pata = getPata(ruta, i);
+
+                if (i == 0)
+                    valor = entradas.ElementAt(entrada).getValor();
+                else {
+                    ruta.ElementAt(i - 1).setSalida();
+                    valor = ruta.ElementAt(i - 1).getSalida();
                 }
+
+                delayTemp += ruta.ElementAt(i).getDelay(pata, valor);
             }
 
 
             if (delayTemp > critical[0]) {
 
-                //poner delay, pos path, Falling = 0
                 critical[0] = delayTemp;
                 critical[1] = pos;
-                critical[2] = 0;
+                critical[2] = risfal;
             }
 
-            if (shortest[0] != -1)
+            if (shortest[0] != -1) {
                 if (delayTemp < shortest[0]) {
 
                     shortest[0] = delayTemp;
                     shortest[1] = pos;
-                    shortest[2] = 0;
-                }
-        }
-
-        public static void calcularDelayR(int pos) {
-
-            int delayTemp = 0;
-            for (int i = 0; i < paths.Count; i++) {
-
-                delayTemp = 0;
-                for (int j = 0; j < paths.ElementAt(i).Count; j++) {
-                
-
+                    shortest[2] = risfal;
                 }
             }
+            else {
 
-            if (delayTemp > critical[0]) { 
-            
-                //poner delay, pos path, Rising = 1
-                critical[0] = delayTemp;
-                critical[1] = pos;
-                critical[2] = 1;
+                shortest[0] = delayTemp;
+                shortest[1] = pos;
+                shortest[2] = risfal;
             }
-
-            if (shortest[0] != -1)
-                if (delayTemp < shortest[0]) {
-
-                    shortest[0] = delayTemp;
-                    shortest[1] = pos;
-                    shortest[2] = 1;
-                }
         }
 
-        public static void justificarRuta(List<Compuerta> ruta, int pos)
-        {
+        public static void justificarRuta(List<Compuerta> ruta, int pos) {
 
             int entradaConstante = getEntradaPath(ruta);
             int cont = 0;
             bool conflicto = false;
             for (int j = 0; j < vectoresPrueba.Length; j++) {
-
+                //borrar valores y sensibilizar
+                borrarValores();
+                sensibilizarRuta(ruta);
                 cont = 0;
                 //assignar valores a probar
                 for (int i = 0; i < entradas.Count; i++) {
@@ -169,8 +225,23 @@ namespace EDCriticalPath
 
                         if (setear)
                             conflicto = paths.ElementAt(path).ElementAt(i).justificar(pata, valor);
-                        else
-                            continue;
+                        else {
+                            //revisar si no crea conflicto con la pata
+                            if (pata == 1) {
+
+                                if (paths.ElementAt(path).ElementAt(i).getValorP1() == valor)
+                                    continue;
+                                else
+                                    conflicto = true;
+                            }
+                            else if (pata == 2) {
+
+                                if (paths.ElementAt(path).ElementAt(i).getValorP2() == valor)
+                                    continue;
+                                else
+                                    conflicto = true;
+                            }
+                        }
 
                         if (conflicto)
                             break;
